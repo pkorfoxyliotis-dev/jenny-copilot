@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jenny Copilot</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="top-bar">
+  <span id="app-title">Jenny</span>
+  <span id="msg-count"></span>
+  <span id="status"></span>
+  <button id="btn-close" title="Close">✕</button>
+</div>
+
+<!-- PROJECT ROW -->
+<div id="project-row">
+  <select id="project-select"><option value="">— Project —</option></select>
+  <button id="btn-new-project" title="New project">+</button>
+  <button id="btn-delete-project" title="Delete project">🗑</button>
+</div>
+
+<!-- MODEL ROW -->
+<div id="model-row">
+  <select id="model-select">
+    <optgroup label="── Venice ──">
+      <option value="venice|llama-3.3-70b">Llama 3.3 70B</option>
+      <option value="venice|mistral-31-24b">Mistral 31 24B</option>
+      <option value="venice|deepseek-r1-671b">DeepSeek R1 671B</option>
+      <option value="venice|venice-uncensored-1-2">Venice Uncensored 1.2</option>
+      <option value="venice|e2ee-venice-uncensored-24b-p">Venice Uncensored 1.1</option>
+      <option value="venice|venice-uncensored-role-play">Venice Role Play Uncensored</option>
+    </optgroup>
+    <optgroup label="── OpenAI ──">
+      <option value="openai|gpt-4o">GPT-4o</option>
+      <option value="openai|gpt-4o-mini">GPT-4o Mini</option>
+      <option value="openai|gpt-4-turbo">GPT-4 Turbo</option>
+      <option value="openai|o3">o3</option>
+      <option value="openai|o4-mini">o4 Mini</option>
+    </optgroup>
+    <optgroup label="── Anthropic ──">
+      <option value="anthropic|claude-opus-4-5">Claude Opus 4.5</option>
+      <option value="anthropic|claude-sonnet-4-5">Claude Sonnet 4.5</option>
+      <option value="anthropic|claude-haiku-3-5">Claude Haiku 3.5</option>
+    </optgroup>
+    <optgroup label="── Google Gemini ──">
+      <option value="gemini|gemini-2.5-pro-preview-05-06">Gemini 2.5 Pro</option>
+      <option value="gemini|gemini-2.5-flash-preview-05-20">Gemini 2.5 Flash</option>
+      <option value="gemini|gemini-2.0-flash">Gemini 2.0 Flash</option>
+      <option value="gemini|gemini-1.5-pro">Gemini 1.5 Pro</option>
+    </optgroup>
+    <optgroup label="── xAI Grok ──">
+      <option value="xai|grok-4-3">Grok 4.3</option>
+      <option value="xai|grok-3">Grok 3</option>
+      <option value="xai|grok-3-fast">Grok 3 Fast</option>
+      <option value="xai|grok-3-mini">Grok 3 Mini</option>
+      <option value="xai|grok-3-mini-fast">Grok 3 Mini Fast</option>
+      <option value="xai|grok-build-0-1">Grok Build 0.1</option>
+    </optgroup>
+    <optgroup label="── Mistral ──">
+      <option value="mistral|mistral-large-latest">Mistral Large</option>
+      <option value="mistral|mistral-small-latest">Mistral Small</option>
+      <option value="mistral|codestral-latest">Codestral</option>
+      <option value="mistral|open-mistral-nemo">Mistral Nemo</option>
+    </optgroup>
+    <optgroup label="── DeepSeek ──">
+      <option value="deepseek|deepseek-v4-flash">DeepSeek V4 Flash</option>
+      <option value="deepseek|deepseek-v4-pro">DeepSeek V4 Pro</option>
+    </optgroup>
+    <optgroup label="── Image Generation ──">
+      <option value="venice|flux-2-max">Flux 2 Max</option>
+      <option value="venice|flux-2-pro">Flux 2 Pro</option>
+      <option value="venice|flux-2-max-edit">Flux 2 Max Edit</option>
+    </optgroup>
+    <optgroup label="── Custom ──">
+      <option value="custom|custom">Custom Endpoint</option>
+    </optgroup>
+  </select>
+  <button id="btn-keys-toggle" title="API Keys">⚙</button>
+</div>
+
+<!-- CUSTOM ENDPOINT ROW -->
+<div id="custom-endpoint-row" style="display:none">
+  <input type="text" id="custom-endpoint" placeholder="https://your-endpoint/v1/chat/completions" />
+</div>
+
+<!-- API KEYS PANEL -->
+<div id="api-keys-panel" style="display:none">
+  <input type="password" id="key-venice"    placeholder="Venice API key" />
+  <input type="password" id="key-openai"    placeholder="OpenAI API key" />
+  <input type="password" id="key-anthropic" placeholder="Anthropic API key" />
+  <input type="password" id="key-gemini"    placeholder="Google Gemini API key" />
+  <input type="password" id="key-xai"       placeholder="xAI Grok API key" />
+  <input type="password" id="key-mistral"   placeholder="Mistral API key" />
+  <input type="password" id="key-deepseek"  placeholder="DeepSeek API key" />
+  <input type="password" id="key-custom"    placeholder="Custom API key" />
+  <div id="search-provider-row">
+    <label>🔍 Search Provider</label>
+    <select id="search-provider">
+      <option value="">— None (search disabled) —</option>
+      <option value="tavily">Tavily</option>
+      <option value="serper">Serper.dev</option>
+      <option value="brave">Brave Search</option>
+      <option value="serpapi">SerpAPI</option>
+    </select>
+    <input type="password" id="key-search" placeholder="Search API key" />
+  </div>
+  <div id="keys-buttons">
+    <button id="btn-save-keys">Save</button>
+    <button id="btn-cancel-keys">Cancel</button>
+  </div>
+</div>
+
+<!-- CONTEXT ROW -->
+<div id="context-row">
+  <button id="btn-ctx-toggle">📋 Context</button>
+  <button id="btn-wrapup">💾 Wrap Up</button>
+  <button id="btn-new-session">🔄 New</button>
+</div>
+
+<!-- CONTEXT PANEL -->
+<div id="context-panel" style="display:none">
+  <textarea id="context-box" placeholder="Project context / system prompt..."></textarea>
+  <div id="context-buttons">
+    <button id="btn-save-context">Save</button>
+    <button id="btn-clear-context">Clear</button>
+  </div>
+</div>
+
+<!-- WRAP UP PANEL -->
+<div id="wrapup-panel" style="display:none">
+  <textarea id="wrapup-box" placeholder="Wrap-up summary will appear here..."></textarea>
+  <div id="wrapup-buttons">
+    <button id="btn-wrapup-save">✅ Save & Archive</button>
+    <button id="btn-wrapup-cancel">✕ Cancel</button>
+  </div>
+</div>
+
+<!-- SEARCH ROW -->
+<div id="search-row">
+  <input type="text" id="search-input" placeholder="🔍 Search chat..." />
+  <button id="btn-search-clear" style="display:none">✕</button>
+</div>
+
+<!-- CHAT AREA -->
+<div id="chat-area"></div>
+
+<!-- ATTACHMENTS PREVIEW -->
+<div id="attachments-preview" style="display:none"></div>
+
+<!-- ACTION BUTTONS ROW -->
+<div id="action-row">
+  <button id="btn-read-page"  title="Read page">📄 Read</button>
+  <button id="btn-snapshot"   title="Snapshot interactive elements">📸 Snap</button>
+  <button id="btn-web-search" title="Search the web then answer">🔍 Search</button>
+  <button id="btn-voice"      title="Voice mode">🎤 Voice</button>
+  <button id="btn-copy"       title="Copy last response">📋</button>
+  <button id="btn-clear-chat" title="Clear chat view">🗑</button>
+  <label  id="btn-attach"     title="Attach file">📎<input type="file" id="file-input" multiple style="display:none" /></label>
+</div>
+
+<!-- INPUT ROW -->
+<div id="input-row">
+  <textarea id="message-box" placeholder="Message Jenny... (Ctrl+Enter to send)"></textarea>
+  <button id="btn-send">Send</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('btn-close');
+  if (btn) btn.addEventListener('click', function() { window.close(); });
+});
+</script>
+<script src="sidepanel.js"></script>
+
+</body>
+</html>

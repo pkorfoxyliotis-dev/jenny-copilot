@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head><title>Generate Jenny Icons</title></head>
+<body style="background:#111;color:#fff;font-family:sans-serif;padding:20px;">
+<h2>Jenny Copilot — Icon Generator</h2>
+<p>Icons will download automatically. Check your Downloads folder.</p>
+<canvas id="c" style="border:1px solid #444;margin:10px;display:block;"></canvas>
+<script>
+function drawIcon(size) {
+  const canvas = document.getElementById('c');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  // Background — deep dark purple rounded
+  const bg = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+  bg.addColorStop(0, '#2d1b69');
+  bg.addColorStop(1, '#0a0a1a');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  ctx.roundRect(0, 0, size, size, size * 0.18);
+  ctx.fill();
+
+  // Purple glow
+  ctx.shadowColor = '#a78bfa';
+  ctx.shadowBlur = size * 0.12;
+
+  // Lightning bolt
+  const s = size;
+  ctx.fillStyle = '#c4b5fd';
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = size * 0.025;
+  ctx.beginPath();
+  ctx.moveTo(s * 0.62, s * 0.05);
+  ctx.lineTo(s * 0.28, s * 0.52);
+  ctx.lineTo(s * 0.48, s * 0.52);
+  ctx.lineTo(s * 0.36, s * 0.95);
+  ctx.lineTo(s * 0.74, s * 0.46);
+  ctx.lineTo(s * 0.54, s * 0.46);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Small J branding on 48+
+  if (size >= 48) {
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = 'rgba(196,181,253,0.55)';
+    ctx.font = `bold ${Math.round(size * 0.17)}px sans-serif`;
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('J', s * 0.93, s * 0.96);
+  }
+}
+
+function downloadIcon(size) {
+  const canvas = document.getElementById('c');
+  drawIcon(size);
+  const link = document.createElement('a');
+  link.download = 'icon-' + size + '.png';
+  link.href = canvas.toDataURL('image/png');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// Show preview
+drawIcon(128);
+
+// Download all 3 sizes
+setTimeout(() => downloadIcon(128), 600);
+setTimeout(() => downloadIcon(48),  1200);
+setTimeout(() => downloadIcon(16),  1800);
+</script>
+</body>
+</html>
