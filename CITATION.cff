@@ -8,3 +8,4 @@ repository-code: "https://github.com/pkorfoxyliotis-dev/jenny-copilot"
 url: "https://memvira.com"
 abstract: A Chrome/Brave side panel AI assistant supporting multiple LLM providers, with project memory and session wrap-up.
 authors: [{family-names: Korfoxyliotis, given-names: Panagiotis G., orcid: "https://orcid.org/0009-0007-6760-4553"}]
+doi: 10.5281/zenodo.22864713
