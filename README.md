@@ -1,5 +1,7 @@
 # Jenny Copilot
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22864713.svg)](https://doi.org/10.5281/zenodo.22864713)
+
 A Chrome/Brave browser extension that puts a powerful AI assistant in your side panel, supporting multiple LLM providers, project memory, session wrap-up, web search, page reading, voice input, and file attachments.
 
 ---
